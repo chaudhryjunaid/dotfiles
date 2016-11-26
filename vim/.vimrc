@@ -15,7 +15,8 @@ function! BuildTern(info)
 endfunction
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.sh
+    !brew install cmake  
+    !./install.py --tern-completer --clang-completer
   endif
 endfunction
 
@@ -44,6 +45,19 @@ Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'shougo/vimproc.vim'
+Plug 'jelera/vim-javascript-syntax' " Additional JS syntax highlighting
+Plug 'plasticboy/vim-markdown' "Markdown support
+Plug 'tpope/vim-fugitive' "Vim wrapper, allow for git viewing in airline
+Plug 'burnettk/vim-angular' " Angular functionality
+Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
+"For JavaScript development
+Plug 'moll/vim-node' " Node js 
+Plug 'groenewege/vim-less' " Less syntax
+Plug 'othree/javascript-libraries-syntax.vim' " Javascript syntax library highlighting
+Plug 'othree/jspc.vim' " Javascript parameter completion
+Plug '1995eaton/vim-better-javascript-completion' " Expansion of vim's javascript
+
+
 
 call plug#end()
 
@@ -163,4 +177,13 @@ let g:NERDCommentEmptyLines = 1
 
 " " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 

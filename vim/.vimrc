@@ -3,6 +3,21 @@ set nocompatible
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
+function! Installjshint(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g jshint
+  endif
+endfunction
+function! BuildTern(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install
+  endif
+endfunction
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
 
 call plug#begin('~/.vim/plugged')
 
@@ -11,11 +26,12 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'do': function('Installjshint') }
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'valloric/youcompleteme'
+Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
+Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }  
 Plug 'pangloss/vim-javascript'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
@@ -28,7 +44,6 @@ Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'shougo/vimproc.vim'
-Plug 'marijnh/tern_for_vim'
 
 call plug#end()
 

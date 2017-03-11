@@ -15,10 +15,22 @@ function! BuildTern(info)
 endfunction
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !brew install cmake  
+    !brew install cmake
     !./install.py --tern-completer --clang-completer
   endif
 endfunction
+function! InstallEditorConfig(info)
+  if a:info.status == 'installed' || a:info.force
+    !brew install editorconfig
+  endif
+endfunction
+function! InstallJSBeautify(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g js-beautify
+  endif
+endfunction
+
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -32,7 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
-Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }  
+Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
 Plug 'pangloss/vim-javascript'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
@@ -51,13 +63,23 @@ Plug 'tpope/vim-fugitive' "Vim wrapper, allow for git viewing in airline
 Plug 'burnettk/vim-angular' " Angular functionality
 Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
 "For JavaScript development
-Plug 'moll/vim-node' " Node js 
+Plug 'moll/vim-node' " Node js
 Plug 'groenewege/vim-less' " Less syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Javascript syntax library highlighting
 Plug 'othree/jspc.vim' " Javascript parameter completion
 Plug '1995eaton/vim-better-javascript-completion' " Expansion of vim's javascript
+Plug 'https://github.com/altercation/vim-colors-solarized.git' " solarized colorscheme
 
-
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'wavded/vim-stylus'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-commentary'
+Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
+Plug 'mileszs/ack.vim'
+Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 
 call plug#end()
 
@@ -69,7 +91,8 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key
-" let mapleader = ","
+let mapleader = ","
+nnoremap ,, ,
 
 " Security
 set modelines=0
@@ -127,6 +150,10 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
+set nobackup
+set noswapfile
+" autosave files when vim loses focus
+au FocusLost * :wa
 "map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.
@@ -146,6 +173,11 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -187,3 +219,18 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+syntax enable
+set background=dark
+colorscheme solarized
+
+" editor config plugin settings
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  cnoreabbrev ag Ack
+  cnoreabbrev aG Ack
+  cnoreabbrev Ag Ack
+  cnoreabbrev AG Ack
+endif

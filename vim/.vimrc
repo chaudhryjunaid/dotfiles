@@ -29,6 +29,12 @@ function! InstallJSBeautify(info)
     !npm install -g js-beautify
   endif
 endfunction
+function! InstallSilverSearcher(info)
+  if a:info.status == 'installed' || a:info.force
+    !brew install the_silver_searcher
+  endif
+endfunction
+
 
 
 
@@ -49,7 +55,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
-Plug 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
 Plug 'vim-airline/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'flazz/vim-colorschemes'
@@ -142,6 +148,10 @@ set laststatus=2
 set showmode
 set showcmd
 
+set cursorline
+set foldenable
+nmap <silent> <BS> :nohlsearch<CR>
+
 " Searching
 "nnoremap / /\v
 "vnoremap / /\v
@@ -152,8 +162,13 @@ set smartcase
 set showmatch
 set nobackup
 set noswapfile
+
 " autosave files when vim loses focus
 au FocusLost * :wa
+
+" autoindent
+set autoindent
+
 "map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.

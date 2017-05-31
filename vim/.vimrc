@@ -89,12 +89,68 @@ Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 
 call plug#end()
 
-
 " Turn on syntax highlighting
 syntax on
 
-" For plugins to load correctly
-filetype plugin indent on
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" NERDCommenter options
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" " Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" " Align line-wise comment delimiters flush left instead of following code
+" indentation
+" let g:NERDDefaultAlign = 'left'
+
+" " Set a language to use its alternate delimiters by default
+" let g:NERDAltDelims_java = 1
+
+" " Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" " Allow commenting and inverting empty lines (useful when commenting a
+" region)
+let g:NERDCommentEmptyLines = 1
+
+" " Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" editor config plugin settings
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  cnoreabbrev ag Ack
+  cnoreabbrev aG Ack
+  cnoreabbrev Ag Ack
+  cnoreabbrev AG Ack
+endif
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+"let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Store|git|hg|svn|optimized|compiled|node_modules|bower_components)$'
+"let g:ctrlp_max_depth = 40
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" | grep -v "`cat ~/.ctrlpignore`"'
+endif
 
 " TODO: Pick a leader key
 let mapleader = ","
@@ -194,58 +250,5 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" air-line
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" NERDCommenter options
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" " Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" " Align line-wise comment delimiters flush left instead of following code
-" indentation
-" let g:NERDDefaultAlign = 'left'
-
-" " Set a language to use its alternate delimiters by default
-" let g:NERDAltDelims_java = 1
-
-" " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" " Allow commenting and inverting empty lines (useful when commenting a
-" region)
-let g:NERDCommentEmptyLines = 1
-
-" " Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 syntax enable
-set background=dark
-colorscheme solarized
 
-" editor config plugin settings
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  cnoreabbrev ag Ack
-  cnoreabbrev aG Ack
-  cnoreabbrev Ag Ack
-  cnoreabbrev AG Ack
-endif

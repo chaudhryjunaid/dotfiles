@@ -7,9 +7,9 @@ scriptencoding utf-8
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
-function! Installjshint(info)
+function! InstallLinters(info)
   if a:info.status == 'installed' || a:info.force
-    !npm install -g jshint
+    !npm install -g jshint eslint babel-eslint
   endif
 endfunction
 function! BuildTern(info)
@@ -50,7 +50,7 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic', { 'do': function('Installjshint') }
+Plug 'scrooloose/syntastic', { 'do': function('InstallLinters') }
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -100,6 +100,8 @@ call plug#end()
 " Turn on syntax highlighting
 syntax on
 colorscheme OceanicNext
+
+let g:syntastic_javascript_checkers = ['eslint']
 
 let g:airline_theme='oceanicnext'
 

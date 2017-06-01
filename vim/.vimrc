@@ -44,6 +44,7 @@ endfunction
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'djoshea/vim-autoread'
 Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -60,6 +61,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 "Plug 'HerringtonDarkholme/yats.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
@@ -97,12 +99,6 @@ call plug#end()
 
 " Turn on syntax highlighting
 syntax on
-
-" for vim 8
-"if (has("termguicolors"))
-"    set termguicolors
-"endif
-
 colorscheme OceanicNext
 
 let g:airline_theme='oceanicnext'
@@ -234,7 +230,8 @@ set nobackup
 set noswapfile
 
 " autosave files when vim loses focus
-au FocusLost * :wa
+au FocusLost,WinLeave * :wa
+"au FocusGained,
 
 " Disable backup and swap files
 set nobackup
@@ -242,8 +239,9 @@ set noswapfile
 
 " Automatically load changed files
 set autoread
+
 " Use the OS clipboard
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " Show matching brackets/parenthesis
 set showmatch

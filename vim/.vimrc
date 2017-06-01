@@ -56,6 +56,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
 Plug 'pangloss/vim-javascript'
+"Plug 'othree/yajs.vim'
+Plug 'othree/html5.vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
@@ -63,7 +66,6 @@ Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
 Plug 'vim-airline/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'shougo/vimproc.vim'

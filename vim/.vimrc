@@ -90,12 +90,20 @@ Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
 Plug 'mileszs/ack.vim'
 Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
-
+Plug 'mhartington/oceanic-next'
 call plug#end()
 
 " Turn on syntax highlighting
 syntax on
 
+" for vim 8
+"if (has("termguicolors"))
+"    set termguicolors
+"endif
+
+colorscheme OceanicNext
+
+let g:airline_theme='oceanicnext'
 
 " air-line
 let g:airline_powerline_fonts = 1

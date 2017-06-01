@@ -1,6 +1,10 @@
 " Don't try to be vi compatible
 set nocompatible
 
+" Baseline
+set encoding=utf-8
+scriptencoding utf-8
+
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 function! Installjshint(info)
@@ -221,6 +225,35 @@ set noswapfile
 
 " autosave files when vim loses focus
 au FocusLost * :wa
+
+" Disable backup and swap files
+set nobackup
+set noswapfile
+
+" Automatically load changed files
+set autoread
+" Use the OS clipboard
+set clipboard=unnamed
+
+" Show matching brackets/parenthesis
+set showmatch
+" Don't blink when matching
+set matchtime=0
+
+" Case insensitive search
+set ignorecase
+" Case sensitive if we type an uppercase
+set smartcase
+
+" Folding
+set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
+
+" Make macros render faster (lazy draw)
+set lazyredraw
+
 
 " autoindent
 set autoindent

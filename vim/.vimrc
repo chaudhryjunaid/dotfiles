@@ -38,6 +38,12 @@ function! InstallSilverSearcher(info)
     !brew install the_silver_searcher
   endif
 endfunction
+function! MakeVimProc(info)
+  if a:info.status == 'installed' || a:info.force
+    !make
+  endif
+endfunction
+
 
 
 
@@ -46,7 +52,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'djoshea/vim-autoread'
 Plug 'junegunn/vim-easy-align'
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
@@ -66,14 +71,12 @@ Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
 Plug 'vim-airline/vim-airline'
-Plug 'rking/ag.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'elzr/vim-json'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'shougo/vimproc.vim'
+Plug 'shougo/vimproc.vim', { 'do': function('MakeVimProc') }
 Plug 'jelera/vim-javascript-syntax' " Additional JS syntax highlighting
 Plug 'plasticboy/vim-markdown' "Markdown support
-Plug 'tpope/vim-fugitive' "Vim wrapper, allow for git viewing in airline
 Plug 'burnettk/vim-angular' " Angular functionality
 Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
 "For JavaScript development
@@ -92,16 +95,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
-Plug 'mileszs/ack.vim'
 Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 Plug 'mhartington/oceanic-next'
+
 call plug#end()
 
 " Turn on syntax highlighting
 syntax on
 colorscheme OceanicNext
-
-let g:syntastic_javascript_checkers = ['eslint']
 
 let g:airline_theme='oceanicnext'
 
@@ -140,9 +141,13 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_args = '--no-ignore'
+let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " editor config plugin settings
@@ -163,6 +168,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" | grep -v "`cat ~/.ctrlpignore`"'
 endif
+
+set timeoutlen=1000 ttimeoutlen=0
 
 " TODO: Pick a leader key
 let mapleader = ","
@@ -190,7 +197,7 @@ set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+"set expandtab
 set noshiftround
 
 " Cursor motion

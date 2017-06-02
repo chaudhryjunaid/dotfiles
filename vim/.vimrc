@@ -5,8 +5,13 @@ set nocompatible
 set encoding=utf-8
 scriptencoding utf-8
 
+"set term=xterm-256color
+
+
 " Helps force plugins to load correctly when it is turned back on below
-filetype off
+"filetype off
+
+
 function! InstallLinters(info)
   if a:info.status == 'installed' || a:info.force
     !npm install -g jshint eslint babel-eslint
@@ -62,9 +67,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
 Plug 'pangloss/vim-javascript'
-"Plug 'othree/yajs.vim'
+Plug 'othree/yajs.vim'
 Plug 'othree/html5.vim'
-"Plug 'HerringtonDarkholme/yats.vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'godlygeek/tabular'
@@ -103,16 +108,18 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " Turn on syntax highlighting
-syntax on
-"colorscheme OceanicNext
-
-"let g:airline_theme='oceanicnext'
-let g:enable_bold_font = 1
+"filetype plugin indent on
+"syntax on
 
 set background=dark
-colorscheme hybrid_material
+colorscheme OceanicNext
 
-let g:airline_theme = 'hybrid'
+let g:airline_theme='oceanicnext'
+
+"let g:enable_bold_font = 1
+
+"colorscheme hybrid_material
+"let g:airline_theme = 'hybrid'
 
 " air-line
 let g:airline_powerline_fonts = 1

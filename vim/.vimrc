@@ -97,14 +97,22 @@ Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
 Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 Plug 'mhartington/oceanic-next'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
 " Turn on syntax highlighting
 syntax on
-colorscheme OceanicNext
+"colorscheme OceanicNext
 
-let g:airline_theme='oceanicnext'
+"let g:airline_theme='oceanicnext'
+let g:enable_bold_font = 1
+
+set background=dark
+colorscheme hybrid_material
+
+let g:airline_theme = 'hybrid'
 
 " air-line
 let g:airline_powerline_fonts = 1

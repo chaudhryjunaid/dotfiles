@@ -55,23 +55,24 @@ endfunction
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'djoshea/vim-autoread'
-Plug 'junegunn/vim-easy-align'
+"Plug 'vim-scripts/auto_autoread.vim'
+"Plug 'djoshea/vim-autoread'
+"Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic', { 'do': function('InstallLinters') }
+"Plug 'scrooloose/syntastic', { 'do': function('InstallLinters') }
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
-Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
+"Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
 Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'
+"Plug 'othree/yajs.vim'
 Plug 'othree/html5.vim'
-Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
@@ -81,7 +82,7 @@ Plug 'elzr/vim-json'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'shougo/vimproc.vim', { 'do': function('MakeVimProc') }
 Plug 'jelera/vim-javascript-syntax' " Additional JS syntax highlighting
-Plug 'plasticboy/vim-markdown' "Markdown support
+"Plug 'plasticboy/vim-markdown' "Markdown support
 Plug 'burnettk/vim-angular' " Angular functionality
 Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
 "For JavaScript development
@@ -90,15 +91,15 @@ Plug 'groenewege/vim-less' " Less syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Javascript syntax library highlighting
 Plug 'othree/jspc.vim' " Javascript parameter completion
 Plug '1995eaton/vim-better-javascript-completion' " Expansion of vim's javascript
-Plug 'https://github.com/altercation/vim-colors-solarized.git' " solarized colorscheme
+"Plug 'https://github.com/altercation/vim-colors-solarized.git' " solarized colorscheme
 
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'wavded/vim-stylus'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-git'
+"Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
 Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 Plug 'mhartington/oceanic-next'
@@ -156,6 +157,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': []  }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '--no-ignore'
 let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
@@ -204,6 +208,8 @@ set visualbell
 
 " Encoding
 set encoding=utf-8
+
+set cpoptions+=$
 
 " Whitespace
 set wrap
@@ -255,17 +261,17 @@ set noswapfile
 
 " autosave files when vim loses focus
 au FocusLost,WinLeave * :wa
-"au FocusGained,
+au FocusGained,BufEnter * :silent! !
 
 " Disable backup and swap files
 set nobackup
 set noswapfile
 
-" Automatically load changed files
-set autoread
+"set autoread
+"au FocusGained,CursorHold,CursorHoldI * checktime
 
 " Use the OS clipboard
-"set clipboard=unnamed
+set clipboard=unnamed
 
 " Show matching brackets/parenthesis
 set showmatch

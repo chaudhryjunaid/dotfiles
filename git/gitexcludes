@@ -33,3 +33,6 @@ Vagrantfile
 # Lint rules
 .eslintrc
 
+# Docker
+Dockerfile*
+.docker*

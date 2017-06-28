@@ -259,7 +259,7 @@ set noswapfile
 "au FocusGained,CursorHold,CursorHoldI * checktime
 
 " Use the OS clipboard
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " Show matching brackets/parenthesis
 set showmatch

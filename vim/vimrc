@@ -286,6 +286,8 @@ set lazyredraw
 " autoindent
 set autoindent
 
+set shortmess+=I
+
 "map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.

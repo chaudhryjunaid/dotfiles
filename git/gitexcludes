@@ -8,6 +8,7 @@ Thumbs.db
 
 # specific git ignores
 .editorconfig
+.jsbeautifyrc
 
 # vim files
 # swap

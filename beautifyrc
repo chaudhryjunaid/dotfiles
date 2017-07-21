@@ -1,0 +1,8 @@
+{
+    "indent_size": 2,
+    "end_with_newline": true,
+	"indent_with_tabs": true,
+    "js": {
+       "preserve-newlines": true
+    }
+}

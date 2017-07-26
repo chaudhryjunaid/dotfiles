@@ -48,6 +48,17 @@ function! MakeVimProc(info)
     !make
   endif
 endfunction
+function! InstallTypings(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g typings
+  endif
+endfunction
+function! InstallTypescript(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install -g typescript
+  endif
+endfunction
+
 
 
 call plug#begin('~/.vim/plugged')
@@ -98,6 +109,13 @@ Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 "Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi', { 'do': function('InstallTypescript') }
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'mhartington/vim-typings', { 'do': function('InstallTypings') }
+Plug 'Shougo/unite.vim'
 
 call plug#end()
 

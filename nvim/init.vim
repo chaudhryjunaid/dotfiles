@@ -20,6 +20,7 @@ endfunction
 function! BuildTern(info)
   if a:info.status == 'installed' || a:info.force
     !npm install
+		!npm install -g tern
   endif
 endfunction
 function! InstallEditorConfig(info)
@@ -52,11 +53,21 @@ function! InstallTypescript(info)
     !npm install -g typescript
   endif
 endfunction
+function! EnableDeoplete(info)
+	if a:info.status == 'installed' || a:info.force
+		!brew install python3
+		!pip3 install neovim
+		!pip3 install --upgrade neovim
+		:UpdateRemotePlugins
+	endif
+endfunction
 
 
+call plug#begin('~/.config/nvim/plugged')
 
-call plug#begin('~/.vim/plugged')
-
+Plug 'jaawerth/nrun.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 "Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -65,13 +76,11 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-commentary'
 "Plug 'tpope/vim-git'
-"Plug 'scrooloose/syntastic', { 'do': function('InstallLinters') }
 Plug 'tpope/vim-surround'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': function('EnableDeoplete') }
 Plug 'ervandew/supertab'
+Plug 'neomake/neomake', { 'do': function('InstallLinters') }
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': function('BuildTern')  }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -81,7 +90,6 @@ Plug 'elzr/vim-json'
 Plug 'easymotion/vim-easymotion'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'godlygeek/tabular'
-Plug 'ervandew/supertab'
 Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
@@ -90,6 +98,9 @@ Plug 'shougo/vimproc.vim', { 'do': function('MakeVimProc') }
 Plug 'jelera/vim-javascript-syntax' " Additional JS syntax highlighting
 Plug 'burnettk/vim-angular' " Angular functionality
 Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
+
+"Plug 'honza/vim-snippets'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 "For JavaScript development
 Plug 'moll/vim-node' " Node js
@@ -123,6 +134,7 @@ filetype plugin indent on
 syntax on
 
 set t_Co=256   " This is may or may not needed.
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set background=dark
 
@@ -134,7 +146,6 @@ colorscheme PaperColor
 "let g:enable_bold_font = 1
 "colorscheme hybrid_material
 "let g:airline_theme = 'hybrid'
-
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -148,6 +159,23 @@ let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
+
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
+"let g:neomake_open_list=2
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+
+au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+au BufEnter *.jsx let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+
+autocmd! FileType javascript,BufWinEnter,BufWritePost * Neomake
+
+"autocmd! BufWritePost * Neomake
 
 " NERDCommenter options
 " Add spaces after comment delimiters by default
@@ -173,21 +201,8 @@ let g:NERDCommentEmptyLines = 1
 " " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': []  }
-"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-"
-"let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_eslint_args = '--no-ignore'
-"let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
-"
-""let g:syntastic_always_populate_loc_list = 1
-""let g:syntastic_auto_loc_list = 1
-""let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%*
 
 " editor config plugin settings
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -202,11 +217,11 @@ if executable('ag')
 endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Store|git|hg|svn|optimized|compiled|node_modules|bower_components)$'
-let g:ctrlp_max_depth = 40
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" | grep -v "`cat ~/.ctrlpignore`"'
-endif
+"let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Store|git|hg|svn|optimized|compiled|node_modules|bower_components)$'
+"let g:ctrlp_max_depth = 40
+"if executable('ag')
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" | grep -v "`cat ~/.ctrlpignore`"'
+"endif
 
 set timeoutlen=1000 ttimeoutlen=0
 
@@ -217,6 +232,14 @@ nnoremap ,, ,
 " map jk and kj to escape
 imap jk <esc>
 imap kj <esc>
+
+" neomake
+nmap <Leader><Space>o :lopen<CR>      " open location window
+nmap <Leader><Space>c :lclose<CR>     " close location window
+nmap <Leader><Space>, :ll<CR>         " go to current error/warning
+nmap <Leader><Space>n :lnext<CR>      " next error/warning
+nmap <Leader><Space>p :lprev<CR>      " previous error/warning
+
 
 " Security
 set modelines=0
@@ -343,6 +366,9 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+
+map <C-p> :FZF<CR>
 
 syntax enable
 

@@ -170,12 +170,13 @@ let g:tern#arguments = ['--persistent']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 
-au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+au BufEnter *.js let b:neomake_jsx_eslint_exe = nrun#Which('eslint')
 au BufEnter *.jsx let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
-autocmd! FileType javascript,BufWinEnter,BufWritePost * Neomake
+"autocmd! FileType javascript,BufWinEnter,BufWritePost * Neomake
+"autocmd! FileType jsx,BufWinEnter,BufWritePost * Neomake
 
-"autocmd! BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
 
 " NERDCommenter options
 " Add spaces after comment delimiters by default

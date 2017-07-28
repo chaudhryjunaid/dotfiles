@@ -143,6 +143,8 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+let g:ycm_auto_trigger = 0
+
 " NERDCommenter options
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -261,6 +263,7 @@ set showcmd
 
 set cursorline
 "set foldenable
+"set foldmethod=syntax
 nmap <silent> <BS> :nohlsearch<CR>
 
 " Searching

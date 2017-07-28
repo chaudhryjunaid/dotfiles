@@ -11,6 +11,7 @@ set -o pipefail
 ln -sfv ~/opensource/dotfiles/vim/vimrc ~/.vimrc
 ln -sfv ~/opensource/dotfiles/vim/gvimrc ~/.gvimrc
 
+ln -sfv ~/opensource/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 
 ln -sfv ~/opensource/dotfiles/git/gitexcludes ~/.gitexcludes
 ln -sfv ~/opensource/dotfiles/git/gitconfig ~/.gitconfig

@@ -1,25 +1,25 @@
 - defaults:
-  link:
-    relink: true
-    create: true
-    force: true
+    link:
+      relink: true
+      create: true
+      force: true
 
 - clean: ['~']
 
 - link:
-  ~/.beautifyrc: null
-  ~/.ctrlpignore: null
-  ~/.editorconfig: null
-  ~/.liquidpromptrc: null
-  ~/.tern-config: null
-  ~/.tmux.conf: null
-  ~/.zshrc: null
-  ~/.git/gitconfig: 'git/gitconfig'
-  ~/.git/gitexcludes: 'git/gitexcludes'
-  ~/.config/nvim/init.vim: 'nvim/init.vim'
-  ~/.gvimrc: 'vim/gvimrc'
-  ~/.vimrc: 'vim/vimrc'
+    ~/.beautifyrc: beautifyrc 
+    ~/.ctrlpignore: ctrlpignore
+    ~/.editorconfig: editorconfig
+    ~/.liquidpromptrc: liquidpromptrc
+    ~/.tern-config: tern-config
+    ~/.tmux.conf: tmux.conf
+    ~/.zshrc: zshrc
+    ~/.git/gitconfig: git/gitconfig
+    ~/.git/gitexcludes: git/gitexcludes
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.gvimrc: vim/gvimrc
+    ~/.vimrc: vim/vimrc
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
 

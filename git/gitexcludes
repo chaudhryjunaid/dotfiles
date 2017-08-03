@@ -37,3 +37,8 @@ Vagrantfile
 # Docker
 Dockerfile*
 .docker*
+
+
+# tern
+.tern-port
+

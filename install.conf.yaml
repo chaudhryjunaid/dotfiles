@@ -10,10 +10,8 @@
     ~/.beautifyrc: beautifyrc 
     ~/.ctrlpignore: ctrlpignore
     ~/.editorconfig: editorconfig
-    ~/.liquidpromptrc: liquidpromptrc
     ~/.tern-config: tern-config
     ~/.tmux.conf: tmux.conf
-    ~/.zshrc: zshrc
     ~/.git/gitconfig: git/gitconfig
     ~/.git/gitexcludes: git/gitexcludes
     ~/.config/nvim/init.vim: nvim/init.vim

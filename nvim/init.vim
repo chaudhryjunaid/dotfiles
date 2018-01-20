@@ -77,12 +77,12 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-commentary'
 "Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim', { 'do': function('EnableDeoplete') }
+"Plug 'Shougo/deoplete.nvim', { 'do': function('EnableDeoplete') }
 Plug 'ervandew/supertab'
-Plug 'neomake/neomake', { 'do': function('InstallLinters') }
-Plug 'SirVer/ultisnips'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': function('BuildTern')  }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'neomake/neomake', { 'do': function('InstallLinters') }
+"Plug 'SirVer/ultisnips'
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': function('BuildTern')  }
+"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
@@ -94,7 +94,7 @@ Plug 'mileszs/ack.vim', { 'do': function('InstallSilverSearcher') }
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'shougo/vimproc.vim', { 'do': function('MakeVimProc') }
+"Plug 'shougo/vimproc.vim', { 'do': function('MakeVimProc') }
 Plug 'jelera/vim-javascript-syntax' " Additional JS syntax highlighting
 Plug 'burnettk/vim-angular' " Angular functionality
 Plug 'jiangmiao/auto-pairs' "Insert or delete brackets, parens, quotes in pair
@@ -111,21 +111,21 @@ Plug '1995eaton/vim-better-javascript-completion' " Expansion of vim's javascrip
 
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'gorodinskiy/vim-coloresque'
-Plug 'wavded/vim-stylus'
+"Plug 'wavded/vim-stylus'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim', { 'do': function('InstallEditorConfig') }
-Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
+"Plug 'chiel92/vim-autoformat', { 'do': function('InstallJSBeautify') }
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
 
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi', { 'do': function('InstallTypescript') }
+"Plug 'leafgarland/typescript-vim'
+"Plug 'Quramy/tsuquyomi', { 'do': function('InstallTypescript') }
 Plug 'jason0x43/vim-js-indent'
 Plug 'Quramy/vim-js-pretty-template'
-Plug 'mhartington/vim-typings', { 'do': function('InstallTypings') }
-Plug 'Shougo/unite.vim'
+"Plug 'mhartington/vim-typings', { 'do': function('InstallTypings') }
+"Plug 'Shougo/unite.vim'
 
 call plug#end()
 
@@ -138,9 +138,9 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set background=dark
 
-colorscheme PaperColor
-"colorscheme lucius
-"let g:airline_theme='lucius'
+"colorscheme PaperColor
+colorscheme lucius
+let g:airline_theme='lucius'
 "colorscheme OceanicNext
 "let g:airline_theme='oceanicnext'
 "let g:enable_bold_font = 1
@@ -263,7 +263,7 @@ set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-"set expandtab
+set expandtab
 set noshiftround
 
 " Cursor motion

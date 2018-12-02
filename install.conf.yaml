@@ -9,7 +9,6 @@
 - link:
     ~/.beautifyrc: beautifyrc 
     ~/.ctrlpignore: ctrlpignore
-    ~/.editorconfig: editorconfig
     ~/.tern-config: tern-config
     ~/.tmux.conf: tmux.conf
     ~/.git/gitconfig: git/gitconfig

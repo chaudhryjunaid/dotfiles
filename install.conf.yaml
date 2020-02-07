@@ -7,15 +7,11 @@
 - clean: ['~']
 
 - link:
-    ~/.beautifyrc: beautifyrc 
-    ~/.ctrlpignore: ctrlpignore
-    ~/.tern-config: tern-config
     ~/.tmux.conf: tmux.conf
-    ~/.git/gitconfig: git/gitconfig
-    ~/.git/gitexcludes: git/gitexcludes
-    ~/.config/nvim/init.vim: nvim/init.vim
-    ~/.gvimrc: vim/gvimrc
-    ~/.vimrc: vim/vimrc
+    ~/.gitconfig: git/gitconfig
+    ~/.gitexcludes: git/gitexcludes
+#    ~/.gvimrc: vim/gvimrc
+#    ~/.vimrc: vim/vimrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
